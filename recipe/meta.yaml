@@ -12,7 +12,7 @@ source:
 build:
   skip: true  # [py<38]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
-  number: 0
+  number: 1
   script:
     - set -x  # [unix]
     - "@ECHO ON"  # [win]
