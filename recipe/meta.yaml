@@ -6,13 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/conda_pypi-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/conda_pypi-{{ version }}.tar.gz
   sha256: c2854faddda313994f01160a19dbfee47639de8836aac449d952a4bfce99c4b9
 
 build:
   skip: true  # [py<38]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
-  number: 0
+  number: 1
   script:
     - set -x  # [unix]
     - "@ECHO ON"  # [win]
