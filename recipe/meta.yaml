@@ -1,13 +1,13 @@
 {% set name = "conda-pypi" %}
-{% set version = "0.2.0" %}
+{% set version = "0.3.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/conda_pypi-{{ version }}.tar.gz
-  sha256: c2854faddda313994f01160a19dbfee47639de8836aac449d952a4bfce99c4b9
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/conda_pypi-{{ version }}.tar.gz
+  sha256: 79d2ba6686ce2c66cd242f8a9e4a2c11824296abad00be48702baf70389f7630
 
 build:
   skip: true  # [py<38]
