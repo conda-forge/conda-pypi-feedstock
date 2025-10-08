@@ -43,6 +43,7 @@ requirements:
     - typer
     - platformdirs
     - conda-index
+    - conda-libmamba-solver
 
 test:
   imports:
