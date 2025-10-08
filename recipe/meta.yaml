@@ -41,7 +41,6 @@ requirements:
     - requests
     - ruamel.yaml
     - typer
-    - pypi-simple
     - platformdirs
 
 test:
