@@ -42,6 +42,7 @@ requirements:
     - ruamel.yaml
     - typer
     - platformdirs
+    - conda-index
 
 test:
   imports:
