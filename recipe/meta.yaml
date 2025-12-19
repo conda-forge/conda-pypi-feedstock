@@ -12,7 +12,7 @@ source:
 build:
   skip: true  # [py<39]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
-  number: 0
+  number: 1
   script:
     - set -x  # [unix]
     - "@ECHO ON"  # [win]
@@ -32,15 +32,10 @@ requirements:
     - python
     - conda >=23.9.0
     - pip >=23.0.1
-    - grayskull
     - packaging
     - unearth
-    - pydantic
     - python-build
     - python-installer
-    - requests
-    - ruamel.yaml
-    - typer
     - platformdirs
     - conda-index
     - conda-libmamba-solver
