@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/conda_pypi-{{ version }}.tar.gz
-  sha256: ac99991f0ec8f2c391dfc14344b2621b130a0dd11cd970443d0f353fe07e6e89
+  sha256: 00ad0a22d7c7b4c71ac04164866d9b36a0acd3ed140ae27378d2ec451dd71452
 
 build:
   skip: true  # [py<39]
@@ -37,8 +37,8 @@ requirements:
     - python-build
     - python-installer
     - platformdirs
-    - conda-index
-    - conda-libmamba-solver
+    - conda-index >=0.7.0
+    - conda-rattler-solver >=0.0.5
 
 test:
   imports:
