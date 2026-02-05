@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/conda_pypi-{{ version }}.tar.gz
-  sha256: 79d2ba6686ce2c66cd242f8a9e4a2c11824296abad00be48702baf70389f7630
+  sha256: ac99991f0ec8f2c391dfc14344b2621b130a0dd11cd970443d0f353fe07e6e89
 
 build:
   skip: true  # [py<39]
