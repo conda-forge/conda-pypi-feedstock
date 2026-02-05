@@ -1,5 +1,5 @@
 {% set name = "conda-pypi" %}
-{% set version = "0.3.0" %}
+{% set version = "0.4.0" %}
 
 package:
   name: {{ name|lower }}
@@ -12,7 +12,7 @@ source:
 build:
   skip: true  # [py<39]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
-  number: 1
+  number: 0
   script:
     - set -x  # [unix]
     - "@ECHO ON"  # [win]
@@ -30,7 +30,7 @@ requirements:
     - hatch-vcs >=0.2.0
   run:
     - python
-    - conda >=23.9.0
+    - conda >=26.1.0
     - pip >=23.0.1
     - packaging
     - unearth
