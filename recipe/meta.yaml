@@ -1,5 +1,5 @@
 {% set name = "conda-pypi" %}
-{% set version = "0.3.0" %}
+{% set version = "0.4.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/conda_pypi-{{ version }}.tar.gz
-  sha256: 79d2ba6686ce2c66cd242f8a9e4a2c11824296abad00be48702baf70389f7630
+  sha256: 00ad0a22d7c7b4c71ac04164866d9b36a0acd3ed140ae27378d2ec451dd71452
 
 build:
   skip: true  # [py<39]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
-  number: 1
+  number: 0
   script:
     - set -x  # [unix]
     - "@ECHO ON"  # [win]
