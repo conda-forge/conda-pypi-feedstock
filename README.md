@@ -3,15 +3,15 @@ About conda-pypi-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/conda-pypi-feedstock/blob/main/LICENSE.txt)
 
-Home: https://github.com/conda-incubator/conda-pypi
+Home: https://github.com/conda/conda-pypi
 
 Package license: MIT
 
 Summary: Better PyPI interoperability for the conda ecosystem
 
-Development: https://github.com/conda-incubator/conda-pypi
+Development: https://github.com/conda/conda-pypi
 
-Documentation: https://conda-incubator.github.io/conda-pypi
+Documentation: https://conda.github.io/conda-pypi
 
 Current build status
 ====================
