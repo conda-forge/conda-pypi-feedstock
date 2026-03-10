@@ -12,7 +12,7 @@ source:
 build:
   skip: true  # [py<39]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
-  number: 1
+  number: 2
   script:
     - set -x  # [unix]
     - "@ECHO ON"  # [win]
@@ -39,6 +39,7 @@ requirements:
     - platformdirs
     - conda-index >=0.7.0
     - conda-rattler-solver >=0.0.5
+    - conda-package-streaming >=0.11
 
 test:
   imports:
