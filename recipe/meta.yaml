@@ -10,7 +10,7 @@ source:
   sha256: 2e987a7c11a31e93bc52e8ce111b40459f3f0e03718e09a85daa4ebd670f6cfb
 
 build:
-  skip: true  # [py<39]
+  skip: true  # [py<310]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
   number: 1
   script:
