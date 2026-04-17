@@ -10,9 +10,9 @@ source:
   sha256: 2e987a7c11a31e93bc52e8ce111b40459f3f0e03718e09a85daa4ebd670f6cfb
 
 build:
-  skip: true  # [py<39]
+  skip: true  # [py<310]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
-  number: 0
+  number: 1
   script:
     - set -x  # [unix]
     - "@ECHO ON"  # [win]
@@ -35,7 +35,7 @@ requirements:
     - packaging
     - unearth
     - python-build
-    - python-installer
+    - python-installer >=1.0
     - platformdirs
     - conda-index >=0.7.0
     - conda-rattler-solver >=0.0.6
