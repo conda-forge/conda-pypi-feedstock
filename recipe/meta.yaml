@@ -1,5 +1,5 @@
 {% set name = "conda-pypi" %}
-{% set version = "0.7.1" %}
+{% set version = "0.8.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/conda_pypi-{{ version }}.tar.gz
-  sha256: 2e987a7c11a31e93bc52e8ce111b40459f3f0e03718e09a85daa4ebd670f6cfb
+  sha256: f8be0d8ab76b1b12ae24b459c5b757f47c9e297f240994da2606759590ab7867
 
 build:
   skip: true  # [py<310]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
-  number: 1
+  number: 0
   script:
     - set -x  # [unix]
     - "@ECHO ON"  # [win]
@@ -37,7 +37,7 @@ requirements:
     - python-build
     - python-installer >=1.0
     - platformdirs
-    - conda-index >=0.7.0
+    - conda-index >=0.11.0
     - conda-rattler-solver >=0.0.6
     - conda-package-streaming >=0.11
 
