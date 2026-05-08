@@ -18,6 +18,10 @@ build:
     - "@ECHO ON"  # [win]
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
     - {{ PYTHON }} -c "from conda_pypi.python_paths import ensure_externally_managed; ensure_externally_managed()"
+    - mkdir -p "${PREFIX}/condarc.d"                                          # [unix]
+    - cp "${RECIPE_DIR}/condarc.d/conda-pypi.yml" "${PREFIX}/condarc.d/"      # [unix]
+    - mkdir "%PREFIX%\condarc.d"                                              # [win]
+    - copy "%RECIPE_DIR%\condarc.d\conda-pypi.yml" "%PREFIX%\condarc.d\"      # [win]
 
 requirements:
   build:
@@ -52,6 +56,8 @@ test:
     - python -c "from conda_pypi.python_paths import get_env_stdlib; assert (get_env_stdlib() / 'EXTERNALLY-MANAGED').exists()"
     - python -c "from conda_pypi.python_paths import get_env_stdlib; content = (get_env_stdlib() / 'EXTERNALLY-MANAGED').read_text(); assert '[externally-managed]' in content"
     - python -c "from conda_pypi.python_paths import get_env_stdlib; content = (get_env_stdlib() / 'EXTERNALLY-MANAGED').read_text(); assert 'conda pypi' in content"
+    - test -f "${PREFIX}/condarc.d/conda-pypi.yml"                            # [unix]
+    - if not exist "%PREFIX%\condarc.d\conda-pypi.yml" exit 1                 # [win]
     - python -m pip install requests && exit 1 || exit 0
     - pip check
 
