@@ -13,15 +13,6 @@ build:
   skip: true  # [py<39]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
   number: 0
-  script:
-    - set -x  # [unix]
-    - "@ECHO ON"  # [win]
-    - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-    - {{ PYTHON }} -c "from conda_pypi.python_paths import ensure_externally_managed; ensure_externally_managed()"
-    - mkdir -p "${PREFIX}/condarc.d"                                          # [unix]
-    - cp "${RECIPE_DIR}/condarc.d/conda-pypi.yml" "${PREFIX}/condarc.d/"      # [unix]
-    - mkdir "%PREFIX%\condarc.d"                                              # [win]
-    - copy "%RECIPE_DIR%\condarc.d\conda-pypi.yml" "%PREFIX%\condarc.d\"      # [win]
 
 requirements:
   build:
