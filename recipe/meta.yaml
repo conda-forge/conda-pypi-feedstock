@@ -1,5 +1,5 @@
 {% set name = "conda-pypi" %}
-{% set version = "0.9.0" %}
+{% set version = "0.10.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,13 +7,13 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/conda_pypi-{{ version }}.tar.gz
-  sha256: d9a75993d17c4269881e9a62a6971aed2c99b6b975eb7f6cd87977c8445a67e3
+  sha256: 1f1637e9194b8874ac7304cefc04ea87d1c6f98a6e262307662e63fd489ad085
 
 build:
   skip: true  # [py<310]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
   # However, EXTERNALLY-MANAGED is temporarily disabled
-  number: 3
+  number: 0
   script:
     - set -x  # [unix]
     - "@ECHO ON"  # [win]
