@@ -1,28 +1,34 @@
-{% set name = "conda-pypi" %}
-{% set version = "0.10.1" %}
+schema_version: 1
+
+context:
+  name: conda-pypi
+  version: "0.10.1"
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/conda_pypi-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/c/conda-pypi/conda_pypi-${{ version }}.tar.gz
   sha256: 179eac4ae82abe8441637df4e0b58aea6a09a56e02aaee9d167d4b2fd19793b3
 
 build:
-  skip: true  # [py<310]
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
   # However, EXTERNALLY-MANAGED is temporarily disabled
   number: 0
+  skip: match(python, "<3.10")
   script:
-    - set -x  # [unix]
-    - "@ECHO ON"  # [win]
-    - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+    - if: unix
+      then: set -x
+    - if: win
+      then: "@ECHO ON"
+    - ${{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   build:
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - if: build_platform != target_platform
+      then:
+        - python
+        - cross-python_${{ target_platform }}
   host:
     - python
     - pip
@@ -40,24 +46,26 @@ requirements:
     - conda-index >=0.11.0
     - conda-package-streaming >=0.11
 
-test:
-  imports:
-    - conda_pypi
-    - conda_pypi.main
-  requires:
-    - pip
-  commands:
-    - python -m conda pypi --help  # Using 'conda pypi' directly on Windows fails due to the actual 'base' conda being found earlier than test-env's conda
-    - pip check
+tests:
+  - python:
+      imports:
+        - conda_pypi
+        - conda_pypi.main
+      pip_check: true
+  - requirements:
+      run:
+        - pip
+    script:
+      # Using 'conda pypi' directly on Windows fails due to the actual 'base' conda being found earlier than test-env's conda
+      - python -m conda pypi --help
 
 about:
-  home: https://github.com/conda/conda-pypi
   license: MIT
-  license_family: MIT
   license_file: LICENSE
   summary: Better PyPI interoperability for the conda ecosystem
-  dev_url: https://github.com/conda/conda-pypi
-  doc_url: https://conda.github.io/conda-pypi
+  homepage: https://github.com/conda/conda-pypi
+  repository: https://github.com/conda/conda-pypi
+  documentation: https://conda.github.io/conda-pypi
 
 extra:
   recipe-maintainers:
