@@ -14,7 +14,7 @@ source:
 build:
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
   # However, EXTERNALLY-MANAGED is temporarily disabled
-  number: 1
+  number: 2
   skip: match(python, "<3.10")
   script:
     - if: unix
@@ -32,7 +32,7 @@ requirements:
   host:
     - python
     - pip
-    - hatchling >=1.12.2
+    - hatchling >=1.26
     - hatch-vcs >=0.2.0
   run:
     - python
