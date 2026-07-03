@@ -241,6 +241,3 @@ Feedstock Maintainers
 * [@jezdez](https://github.com/jezdez/)
 * [@ryanskeith](https://github.com/ryanskeith/)
 
-
-<!-- dummy commit to enable rerendering -->
-
