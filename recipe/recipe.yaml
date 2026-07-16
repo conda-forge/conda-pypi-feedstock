@@ -14,7 +14,7 @@ source:
 build:
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
   # However, EXTERNALLY-MANAGED is temporarily disabled
-  number: 0
+  number: 1
   skip: match(python, "<3.10")
   script:
     - if: unix
@@ -36,7 +36,6 @@ requirements:
     - hatch-vcs >=0.2.0
   run:
     - python
-    - conda >=26.1.0
     - pip >=23.0.1
     - packaging
     - unearth
@@ -45,6 +44,11 @@ requirements:
     - platformdirs
     - conda-index >=0.11.0
     - conda-package-streaming >=0.11
+  run_constraints:
+    # This is technically a `run` dependency (we do import it), but
+    # conda already depends on conda-pypi, so it creates a
+    # dependency cycle that complicates migrations
+    - conda >=26.1.0
 
 tests:
   - python:
