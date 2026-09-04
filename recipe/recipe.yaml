@@ -13,9 +13,9 @@ source:
 
 build:
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
-  # However, EXTERNALLY-MANAGED is temporarily disabled
-  number: 1
-  skip: match(python, "<3.10")
+  # However, EXTERNALLY-MANAGED is temporarily disabled, so go back to noarch
+  noarch: python
+  number: 2
   script:
     - if: unix
       then: set -x
@@ -24,18 +24,13 @@ build:
     - ${{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
-  build:
-    - if: build_platform != target_platform
-      then:
-        - python
-        - cross-python_${{ target_platform }}
   host:
-    - python
+    - python ${{ python_min }}.*
     - pip
     - hatchling >=1.26
     - hatch-vcs >=0.2.0
   run:
-    - python
+    - python >=${{ python_min }}
     - pip >=23.0.1
     - packaging
     - unearth
@@ -56,6 +51,9 @@ tests:
         - conda_pypi
         - conda_pypi.main
       pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
   - requirements:
       run:
         - pip
