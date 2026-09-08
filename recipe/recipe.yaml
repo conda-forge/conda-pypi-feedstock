@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "0.11.0"
+  version: "0.12.0"
 
 package:
   name: conda-pypi
@@ -9,13 +9,13 @@ package:
 
 source:
   url: https://pypi.org/packages/source/c/conda-pypi/conda_pypi-${{ version }}.tar.gz
-  sha256: 9137327ffef74aaac7a95e5940b39e4bc333c77f05d22efeb199af6767e3b481
+  sha256: 8a07533ac47a15c4f3276da7e7d8cbc53a947aced76e1430964e2ec1b7b941a0
 
 build:
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
   # However, EXTERNALLY-MANAGED is temporarily disabled, so go back to noarch
   noarch: python
-  number: 2
+  number: 0
   script:
     - if: unix
       then: set -x
@@ -31,13 +31,12 @@ requirements:
     - hatch-vcs >=0.2.0
   run:
     - python >=${{ python_min }}
-    - pip >=23.0.1
     - packaging
     - unearth
     - python-build
     - python-installer >=1.0
     - platformdirs
-    - conda-index >=0.11.0
+    - conda-index >=0.12.0
     - conda-package-streaming >=0.11
   run_constraints:
     # This is technically a `run` dependency (we do import it), but
@@ -50,15 +49,22 @@ tests:
       imports:
         - conda_pypi
         - conda_pypi.main
-      pip_check: true
+      # pip check runs in the script test below, where ruamel.yaml can be
+      # pinned; python tests do not support extra requirements.
+      pip_check: false
       python_version:
         - ${{ python_min }}.*
         - "*"
   - requirements:
       run:
         - pip
+        # conda 26.7.2 pip metadata requires ruamel-yaml <0.19, but the
+        # conda-forge conda package allows <0.20, so the solver can install
+        # ruamel.yaml 0.19.x and break pip check. Remove once conda's pip
+        # metadata allows ruamel.yaml 0.19.
+        - ruamel.yaml >=0.11.14,<0.19
     script:
-      # Using 'conda pypi' directly on Windows fails due to the actual 'base' conda being found earlier than test-env's conda
+      - pip check
       - python -m conda pypi --help
 
 about:
