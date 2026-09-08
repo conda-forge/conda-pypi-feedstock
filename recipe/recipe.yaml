@@ -45,25 +45,26 @@ requirements:
     - conda >=26.1.0
 
 tests:
-  - requirements:
-      run:
-        # conda 26.7.2 pip metadata requires ruamel-yaml <0.19, but the
-        # conda-forge conda package allows <0.20, so the solver can install
-        # ruamel.yaml 0.19.x and break pip check. Remove once conda's pip
-        # metadata allows ruamel.yaml 0.19.
-        - ruamel.yaml >=0.11.14,<0.19
-    python:
+  - python:
       imports:
         - conda_pypi
         - conda_pypi.main
-      pip_check: true
+      # pip check runs in the script test below, where ruamel.yaml can be
+      # pinned; python tests do not support extra requirements.
+      pip_check: false
       python_version:
         - ${{ python_min }}.*
         - "*"
   - requirements:
       run:
         - pip
+        # conda 26.7.2 pip metadata requires ruamel-yaml <0.19, but the
+        # conda-forge conda package allows <0.20, so the solver can install
+        # ruamel.yaml 0.19.x and break pip check. Remove once conda's pip
+        # metadata allows ruamel.yaml 0.19.
+        - ruamel.yaml >=0.11.14,<0.19
     script:
+      - pip check
       - python -m conda pypi --help
 
 about:
