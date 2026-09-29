@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "0.12.0"
+  version: "0.13.0"
 
 package:
   name: conda-pypi
@@ -9,13 +9,13 @@ package:
 
 source:
   url: https://pypi.org/packages/source/c/conda-pypi/conda_pypi-${{ version }}.tar.gz
-  sha256: 8a07533ac47a15c4f3276da7e7d8cbc53a947aced76e1430964e2ec1b7b941a0
+  sha256: 014fef0c7cb355d15e34e994476df01f82df6ada9680c3ff06e6371113a77e3a
 
 build:
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
   # However, EXTERNALLY-MANAGED is temporarily disabled, so go back to noarch
   noarch: python
-  number: 1
+  number: 0
   script:
     - if: unix
       then: set -x
