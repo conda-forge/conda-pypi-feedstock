@@ -39,6 +39,7 @@ requirements:
     - conda-index >=0.13.0
     - conda-package-streaming >=0.11
   run_constraints:
+    # eMudhra certificate compromise
     - certifi >=2026.10.19
     # This is technically a `run` dependency (we do import it), but
     # conda already depends on conda-pypi, so it creates a
