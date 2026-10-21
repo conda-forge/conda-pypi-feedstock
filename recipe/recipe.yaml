@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "0.13.0"
+  version: "0.13.1"
 
 package:
   name: conda-pypi
@@ -9,13 +9,13 @@ package:
 
 source:
   url: https://pypi.org/packages/source/c/conda-pypi/conda_pypi-${{ version }}.tar.gz
-  sha256: 014fef0c7cb355d15e34e994476df01f82df6ada9680c3ff06e6371113a77e3a
+  sha256: e82817d8295d535aa22f09e3c9bc38ddaf7c73c082daffdb6325898b131dd0ba
 
 build:
   # can't be noarch because we can't place EXTERNALLY-MANAGED in stdlib (first level is site-packages)
   # However, EXTERNALLY-MANAGED is temporarily disabled, so go back to noarch
   noarch: python
-  number: 1
+  number: 0
   script:
     - if: unix
       then: set -x
@@ -39,6 +39,7 @@ requirements:
     - conda-index >=0.13.0
     - conda-package-streaming >=0.11
   run_constraints:
+    # eMudhra certificate compromise
     - certifi >=2026.10.19
     # This is technically a `run` dependency (we do import it), but
     # conda already depends on conda-pypi, so it creates a
